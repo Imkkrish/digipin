@@ -29,12 +29,15 @@ COPY --chown=nodejs:nodejs . .
 # Set user
 USER nodejs
 
-# Expose port
+# Expose port (Render will use PORT env variable)
 EXPOSE 5002
 
-# Health check
-HEALTHCHECK --interval=10s --timeout=5s --start-period=10s --retries=5 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:5002/health || exit 1
+# Environment variable
+ENV PORT=5002
+
+# Health check - use PORT env variable
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:${PORT}/health || exit 1
 
 # Start the application
 CMD ["node", "server.js"]

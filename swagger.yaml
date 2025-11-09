@@ -4,7 +4,10 @@ info:
   description: Encode and decode DIGIPIN based on latitude and longitude
   version: 1.0.0
 servers:
-  - url: http://localhost:5000/api
+  - url: https://hackathon-umu-digipin.onrender.com/api
+    description: Production server
+  - url: http://localhost:5002/api
+    description: Local development server
 
 paths:
   /digipin/encode:
